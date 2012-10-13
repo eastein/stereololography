@@ -1,5 +1,25 @@
 import math
 
+class Unit(object) :
+	@classmethod
+	def convert(cls, v) :
+		return cls.mult * v
+
+class cm(Unit) :
+	mult = 10
+
+class mm(Unit) :
+	mult = 1
+
+class inch(Unit) :
+	mult = 25.4
+
+class foot(Unit) :
+	mult = inch.mult * 12
+
+class m(Unit) :
+	mult = 1000
+
 class Base(object) :
 	@classmethod
 	def format(cls, v) :
@@ -26,14 +46,19 @@ class Base(object) :
 # TODO lazy-evaluate the serialization to string/text.  Right now, if you modify the positions of anything after creation it won't serialize right.
 
 class Point(Base) :
+	unit = mm
+
 	def __init__(self, x, y, z) :
-		self.x = x
-		self.xf = Base.format(x)
-		self.y = y
-		self.yf = Base.format(y)
-		self.z = z
-		self.zf = Base.format(z)
+		self.x = self.unit.convert(x)
+		self.y = self.unit.convert(y)
+		self.z = self.unit.convert(z)
+
+		self.xf = Base.format(self.x)
+		self.yf = Base.format(self.y)
+		self.zf = Base.format(self.z)
+
 		self.pf = "%s %s %s" % (self.xf, self.yf, self.zf)
+
 		Base.__init__(self)
 
 class Triangle(Base) :
