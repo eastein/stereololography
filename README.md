@@ -18,3 +18,21 @@ It's easy! Just go like:
     stl.serialize([solid], "out.stl")
 
 This will work with either a filehandle or a string filename. If you supply a string filename, it will be opened for writing, truncate mode, and closed when the function completes. This will happen even if the file was not fully written due to an error. Nothing will be deleted on error.
+
+<A name="toc1-21" title="Example" />
+# Example
+
+The first working case (example_tetra-almost.py) is shown having results here: https://twitter.com/toba/status/257051666371710976
+
+    python example_tetra-almost.py
+
+Load this into your favorite 3D printing setup and you're off to the races.  For makerbot Replicator:
+
+* load into ReplicatorG
+* click create gcode
+* choose a print-head
+* set the correct filament size
+* go for it
+* create SD card image, copy outputted file onto SD card
+* put in printer
+* print from SD card

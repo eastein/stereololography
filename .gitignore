@@ -1,3 +1,4 @@
+*.gcode
 *~
 *.pyc
 out.stl
