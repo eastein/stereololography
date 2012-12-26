@@ -15,6 +15,8 @@ class Projector(object) :
 		self.e = (-10.0,-10.0,10.0)
 
 	# TODO add a parameter for how large a viewport to use, and what units. Add support to svgcuts to use all the units stereololography supports
+	# TODO add an option to automatically home the camera? should it work by translating and scaling the render after it's done, or adjusting the 
+	# theta parameters to the visible portions of the scene?
 	def project(self, o) :
 		# TODO don't default the size and units of the layer.
 		layer = svgcuts.Layer(6.0, 8.0, unit="in")
