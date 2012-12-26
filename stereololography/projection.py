@@ -12,7 +12,7 @@ class Projector(object) :
 		self.c = c
 		self.t = t
 		# position has to be messed around. It doesn't work quite right sense so far.
-		self.e = (-10.0,-10.0,-.5)
+		self.e = (-10.0,-10.0,10.0)
 
 	# TODO add a parameter for how large a viewport to use, and what units. Add support to svgcuts to use all the units stereololography supports
 	def project(self, o) :
@@ -48,7 +48,8 @@ class Projector(object) :
 		# math taken from the wikipedia page on 3d perspective projection
 		dx = math.cos(self.t[1]) * (math.sin(self.t[2]) * (a.y - self.c.y) + math.cos(self.t[2]) * (a.x - self.c.x)) - math.sin(self.t[1]) * (a.z - self.c.z)
 		dy = math.sin(self.t[0]) * (math.cos(self.t[1]) * (a.z - self.c.z) + math.sin(self.t[1]) * (math.sin(self.t[2]) * (a.y - self.c.y) + math.cos(self.t[2]) * (a.x - self.c.x))) + math.cos(self.t[0]) * (math.cos(self.t[2]) * (a.y - self.c.y) - math.sin(self.t[2]) * (a.x - self.c.x))
-		dz = 1.0
+
+		dz = math.cos(self.t[0]) * (math.cos(self.t[1]) * (a.z - self.c.z) + math.sin(self.t[1]) * (math.sin(self.t[2]) * (a.y - self.c.y) + math.cos(self.t[2]) * (a.x - self.c.x))) - math.sin(self.t[0]) * (math.cos(self.t[2]) * (a.y - self.c.y) - math.sin(self.t[2]) * (a.x - self.c.x))
 
 		print 'd: <%f, %f, %f>' % (dx, dy, dz)
 
