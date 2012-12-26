@@ -44,7 +44,6 @@ class Base(object) :
 		return pref + suf
 
 # TODO lazy-evaluate the serialization to string/text.  Right now, if you modify the positions of anything after creation it won't serialize right.
-
 class Point(Base) :
 	unit = mm
 

@@ -1,4 +1,5 @@
 import stereololography as stl
+import stereololography.projection as proj
 
 stl.Point.unit = stl.cm
 
@@ -16,3 +17,9 @@ solid.add(triangle2)
 solid.add(triangle3)
 solid.add(triangle4)
 stl.serialize([solid], "tetra-almost.stl")
+
+# guesstimated inputs.
+# How do tait-bryan angles relate to the camera point?
+p = proj.Projector(stl.Point(2.0, 2.0, 0.0), (0,0,0))
+layer = p.project(solid)
+layer.write('tetra-almost.svg')
