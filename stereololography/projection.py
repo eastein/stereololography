@@ -2,6 +2,7 @@ import svgcuts
 import math
 import stereololography as stl
 
+# am I using left handed vs right handed axes? I think my projection code is for left handed, but it's entirely possible the axes used in stereololography are right handed.
 class Projector(object) :
 	"""
 	@param c the camera point
@@ -19,7 +20,7 @@ class Projector(object) :
 	# theta parameters to the visible portions of the scene?
 	def project(self, o) :
 		# TODO don't default the size and units of the layer.
-		layer = svgcuts.Layer(6.0, 8.0, unit="in")
+		layer = svgcuts.Layer(8.0, 6.0, unit="in")
 		self.project_inner(layer, o)
 		return layer
 
