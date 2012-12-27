@@ -13,7 +13,7 @@ class Projector(object) :
 		self.c = c
 		self.t = t
 		# position has to be messed around. It doesn't work quite right sense so far.
-		self.e = (-10.0,-10.0,10.0)
+		self.e = (0.0,0.0,-5.0)
 
 	# TODO add a parameter for how large a viewport to use, and what units. Add support to svgcuts to use all the units stereololography supports
 	# TODO add an option to automatically home the camera? should it work by translating and scaling the render after it's done, or adjusting the 
