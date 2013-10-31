@@ -26,6 +26,7 @@ class Projector(object) :
 
 		# TODO move this to example? or parameterize it somehow. Either way, this is important for getting your bearings on how the
 		# coordinate system is laid out.
+		
 		n = 2
 		r = 0.1
 		m = .8
