@@ -43,6 +43,11 @@ class Base(object) :
 
 		return pref + suf
 
+	@classmethod
+	def parse(cls, v) :
+		# I'm too sleepy to be programming this too, seems to be a trend
+		pass
+
 # TODO lazy-evaluate the serialization to string/text.  Right now, if you modify the positions of anything after creation it won't serialize right.
 class Point(Base) :
 	unit = mm
@@ -87,6 +92,34 @@ class Solid(Base) :
 		for triangle in self.triangles :
 			fh.write(triangle.tf)
 		fh.write("endsolid %s\n" % self.name)
+
+	@classmethod
+	def read(self, fh) :
+		r = {}
+
+		solid = None
+		points = []
+
+		def emit_solid() :
+			global solid
+
+			if solid is not None :
+				r[solid.name] = solid
+				solid = None
+
+		for line in [line.strip() for line in fh] :
+			if not line :
+				continue
+			tokens = line.split(' ')
+
+			command = tokens[0]
+			
+			if command == 'solid' :
+				emit_solid()
+				solid = cls(tokens[1])
+			
+			if command == 'vertex' :
+				pass
 
 def serialize_to_file(solids, fh) :
 	for solid in solids :

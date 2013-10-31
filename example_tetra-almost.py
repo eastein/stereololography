@@ -21,6 +21,7 @@ stl.serialize([solid], "tetra-almost.stl")
 
 # guesstimated inputs.
 # How do tait-bryan angles relate to the camera point?
-p = proj.Projector(stl.Point(4.1, 3.8, 4.2), (math.pi * -1/16,math.pi * 1/8.0, 0))
+
+#p = proj.Projector(stl.Point(4.1, 3.8, 4.2), (math.pi * -1/16,math.pi * 1/8.0, 0))
 layer = p.project(solid)
 layer.write('tetra-almost.svg')
