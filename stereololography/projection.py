@@ -27,36 +27,37 @@ class Projector(object) :
 		# TODO move this to example? or parameterize it somehow. Either way, this is important for getting your bearings on how the
 		# coordinate system is laid out.
 		
-		n = 2
-		r = 0.1
-		m = .8
-		for x in range(-n, n + 1) :
-			for y in range(-n, n + 1) :
-				for z in range(-n, n + 1) :
-					if x == 0 and y == 0 and z == 0 :
-						continue
+		if False :
+			n = 2
+			r = 0.1
+			m = .8
+			for x in range(-n, n + 1) :
+				for y in range(-n, n + 1) :
+					for z in range(-n, n + 1) :
+						if x == 0 and y == 0 and z == 0 :
+							continue
 
-					c = r * m
-					_c = math.pow(math.pow(x, 2.0) + math.pow(y, 2.0) + math.pow(z, 2.0), 0.5)
-					xm = x / _c * c
-					ym = y / _c * c
-					zm = z / _c * c
-					p1 = stl.Point(x * m, y * m, z * m)
-					p2 = stl.Point(x * m + xm, y * m + ym, z * m + zm)
+						c = r * m
+						_c = math.pow(math.pow(x, 2.0) + math.pow(y, 2.0) + math.pow(z, 2.0), 0.5)
+						xm = x / _c * c
+						ym = y / _c * c
+						zm = z / _c * c
+						p1 = stl.Point(x * m, y * m, z * m)
+						p2 = stl.Point(x * m + xm, y * m + ym, z * m + zm)
 
-					p1 = self.project_point(p1)
-					p2 = self.project_point(p2)
+						p1 = self.project_point(p1)
+						p2 = self.project_point(p2)
 
-					# axes colors
-					kw = {}
-					if y == 0 and z == 0 :
-						kw['color'] = 'red'
-					elif x == 0 and z == 0 :
-						kw['color'] = 'green'
-					elif x == 0 and y == 0 :
-						kw['color'] = 'blue'
+						# axes colors
+						kw = {}
+						if y == 0 and z == 0 :
+							kw['color'] = 'red'
+						elif x == 0 and z == 0 :
+							kw['color'] = 'green'
+						elif x == 0 and y == 0 :
+							kw['color'] = 'blue'
 
-					layer.add_line(svgcuts.Line(p1, p2, **kw))
+						layer.add_line(svgcuts.Line(p1, p2, **kw))
 		return layer
 
 	def project_inner(self, l, o) :

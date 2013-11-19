@@ -1,3 +1,8 @@
+import tornado.web
+import tornado.ioloop
+import tornado.httpclient
+
+
 import stereololography as stl
 import stereololography.projection as proj
 import math
@@ -19,10 +24,39 @@ solid.add(triangle3)
 solid.add(triangle4)
 stl.serialize([solid], "tetra-almost.stl")
 
-# guesstimated inputs.
 # How do tait-bryan angles relate to the camera point?
 
-for x in [2,3,4,5,6] :
-	p = proj.Projector(stl.Point(x, 3.8, 4.2), (math.pi * -1/16,math.pi * 1/8.0, 0))
-	layer = p.project(solid)
-	layer.write('tetra-almost-x%0.3f.svg' % (float(x)))
+def render(x, y, z, a1, a2, a3) :
+	p = proj.Projector(stl.Point(x, y, z), (a1, a2, a3))
+	layer = p.project(solid).slice_lines()
+	return layer.render()
+
+class BaseHandler(tornado.web.RequestHandler):
+	def wj(self, status, j) :
+		self.application.__io_instance__.add_callback(lambda: self._wj(status, j))
+
+	def _wj(self, status, j) :
+		self.set_status(status)
+		self.set_header('Access-Control-Allow-Origin', '*')
+		self.set_header('Cache-Control', 'no-cache')
+		self.set_header('Content-Type', 'image/svg+xml')
+		self.write(j)
+		self.finish()
+
+
+class Render(BaseHandler):
+	@tornado.web.asynchronous
+	def get(self, x, y, z, a1, a2, a3) :
+		self._wj(200, render(float(x), float(y), float(z), float(a1), float(a2), float(a3)))
+
+
+handler_set = [
+	(r"/render/([\-]{0,1}[0-9]+\.[0-9]+),([\-]{0,1}[0-9]+\.[0-9]+),([\-]{0,1}[0-9]+\.[0-9]+)/([\-]{0,1}[0-9]+\.[0-9]+),([\-]{0,1}[0-9]+\.[0-9]+),([\-]{0,1}[0-9]+\.[0-9]+)$", Render),
+]
+
+application = tornado.web.Application(handler_set)
+
+application.listen(8088)
+
+application.__io_instance__ = tornado.ioloop.IOLoop.instance()
+application.__io_instance__.start()
