@@ -9,8 +9,13 @@ import math
 
 stl.Point.unit = stl.cm
 
-# am i going to turn this into an example for writing an stl or a graphical 3d rendering tool
-# i should probably separate the model and stl and the web based svg rendering thing into 2 files.
+# TODO
+# * turn this into an example for writing an stl or a graphical 3d rendering tool the rest of the way -
+#   separate the model and stl and the web based svg rendering thing into 2 files.
+# * move jquery references into served-by tornado - use git submodule maybe
+# * dual-camera mode for automatically placing multiple cameras
+# * click-to-save both svgs out
+# * / URL rendering the HTML interface
 
 p1 = stl.Point(0.0, 0.0, 0.0)
 p2 = stl.Point(1.0, 0.0, 0.0)
