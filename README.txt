@@ -1,6 +1,6 @@
 # LOL, STL
 
-STL is an okay format but want to code my 3D prints! Make me triangles! Fly, my pretties!
+STL is an okay format but I want to code my 3D prints instead, to automatically generate anything I want using my python code. Make me triangles! Fly, my pretties!
 
 # OK, so how do I make an STL?
 
